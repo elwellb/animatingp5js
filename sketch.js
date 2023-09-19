@@ -8,6 +8,8 @@ let xPos2;
 let yPos2;
 let speed2 = 4;
 let color = 0;
+let bgcolor = "orange";
+let time;
 
 function setup() {
   //Create Canvas
@@ -22,9 +24,17 @@ function setup() {
 }
 
 function draw() {
+  time = millis();
+  
   //Set background
-  background("orange");
+  background(bgcolor);
 
+  //Create fading rectangle that becomes opaque with time
+  noStroke();
+  fill(255, 200, 225, time/50);
+  rect(width/2-40, 40, 80, 50);
+
+  stroke(1)
   //Create Circle
   fill(color);
   ellipse(xPos, yPos, diameter);
@@ -51,21 +61,12 @@ function draw() {
     speed2 = -speed2;
   }
   xPos2 += speed2;
+
+  //Change background color after 10 seconds
+  if(time >= 10000) {
+    bgcolor = "orchid"
+  }
 }
-
-// //Stop loop if mouse is pressed
-// function mousePressed() {
-
-//   noLoop();
-  
-// }
-
-// //Start loop again when mouse is released
-// function mouseReleased() {
-
-//   loop();
-
-// }
 
 //Check to see if the mouse is clicked
 function mouseClicked() {
@@ -81,3 +82,4 @@ function mouseClicked() {
     color = random(255);
   }
 }
+
